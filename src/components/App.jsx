@@ -10,23 +10,31 @@ function App() {
   }
 
   function addItem() {
+    if(inputText===""){
+      return "";
+    }
     setItems(prevItems => {
       return [...prevItems, inputText];
     });
     setInputText("");
+    document.getElementById("in").focus()
   }
 
  function enterPressed(event) {
     var code = event.keyCode || event.which;
     if(code === 13) { 
+       if(inputText===""){
+         return "";
+       }
       setItems(prevItems => {
         return [...prevItems, inputText];
       });
-      setInputText(""); 
+      setInputText("");
+     document.getElementById("in").focus()
 
     } 
 }
-const [line,setLine]=useState(false)
+
 function deleteItem(id){
   setItems(prevItems=>{
      return prevItems.filter((item,index)=>{
@@ -40,7 +48,7 @@ function deleteItem(id){
         <h1>To-Do List</h1>
       </div>
       <div className="form">
-        <input onChange={handleChange} type="text" value={inputText} onKeyPress={enterPressed} />
+        <input id="in" onChange={handleChange} type="text" value={inputText} onKeyPress={enterPressed} />
         <button onClick={addItem}>
           <span>Add</span>
         </button>
